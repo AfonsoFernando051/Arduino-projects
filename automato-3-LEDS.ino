@@ -70,10 +70,10 @@ void loop() {
         while(digitalRead(BOTAO_PISCA) == LOW){
           piscaTodosLeds();
         }
-
         estadoAtual = INICIAL;
       }else{
        estadoAtual = INICIAL;
+       apagarLed(LED_VERMELHO_1);
        apagarLed(LED_VERDE);
        apagarLed(LED_VERMELHO_2);
       }
@@ -123,7 +123,8 @@ void piscaTodosLeds(){
   unsigned long tempoAtual = millis();
 
   // Verifica se passou o tempo suficiente para alternar o estado dos LEDs
-  if (tempoAtual - ultimoTempo >= UM_SEGUNDO) {
+ if ((millis() - ultimoTempo) >= UM_SEGUNDO) {
+
     ultimoTempo = tempoAtual;  // Atualiza o tempo
     estadoLed = !estadoLed;    // Alterna o estado
 
